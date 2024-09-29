@@ -1,0 +1,62 @@
+.signin-page {
+    background-color: #f9f9f9; /* Light background */
+    padding: 2rem;
+}
+
+.field {
+    margin-bottom: 1.5rem;
+}
+
+.p-inputtext {
+    width: 100%; /* Ensure inputs take full width */
+}
+
+.p-button {
+    background-color: #007ad9; /* PrimeReact default blue */
+    border: none; /* Remove default border */
+}
+
+/* src/components/ProfilePage.css */
+
+.profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header .profile-info {
+    margin-left: 1.5rem;
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.profile-header p {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.edit-button {
+    background-color: #007ad9; /* PrimeReact Blue */
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+    background-color: #005f99; /* Darker shade for hover */
+}
