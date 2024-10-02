@@ -72,5 +72,21 @@ const updateDoc = async (req, res) => {
     res.status(500).json({ error: 'Failed to update document' });
   }
 };
+const deleteDocById = async (req, res) => {
+  try {
+    const { id } = req.params; // Get document ID from request params
+    const deletedDoc = await Doc.findByIdAndDelete(id); // Find and delete the document by ID
 
-module.exports = { createDoc, getDocById, updateDoc };
+    if (!deletedDoc) {
+      return res.status(404).json({ error: 'Document not found' });
+    }
+
+    res.status(200).json({ message: 'Document deleted successfully', deletedDoc });
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    res.status(500).json({ error: 'Failed to delete document' });
+  }
+};
+
+
+module.exports = { createDoc, getDocById, updateDoc,deleteDocById };

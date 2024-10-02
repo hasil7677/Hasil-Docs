@@ -51,7 +51,7 @@ export default function Navbar() {
     );
 
     const handleLogout = () => {
-        localStorage.removeItem('token');  // Remove token from localStorage
+        localStorage.clear();  // Remove token from localStorage
         setIsLoggedIn(false);             // Update isLoggedIn to false
         console.log('Logged out successfully');
     };

@@ -1,10 +1,11 @@
-
-import React, { useState, useEffect } from 'react';
+// src/pages/SignInPage.tsx
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Card } from 'primereact/card'; // Importing Card component for better layout
 import { signin } from '../services/authService'; // Import the signin function from your service
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { AuthContext } from '../context/authContext'; // Import AuthContext
 import './pages.css'; // Ensure to import your styles here
 
 const SignInPage = () => {
@@ -12,6 +13,7 @@ const SignInPage = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null); // Error state
     const navigate = useNavigate(); // Initialize useNavigate
+    const authContext = useContext(AuthContext); // Access AuthContext
 
     // Redirect if token exists
     useEffect(() => {
@@ -30,7 +32,14 @@ const SignInPage = () => {
             // Save the token or any necessary data (e.g., user ID) in local storage
             localStorage.setItem('token', data.token);
             console.log('Sign-in successful:', data);
+
+            // Update the authentication context
+            if (authContext && authContext.setIsLoggedIn) {
+                authContext.setIsLoggedIn(true); // Update context state
+            }
+
             // Redirect or update state as needed
+            navigate('/'); // Optionally redirect to home after sign-in
         } catch (err: any) {
             setError(err.message || 'An error occurred during sign-in.');
             console.error("Sign-in error:", err);

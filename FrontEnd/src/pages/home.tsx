@@ -6,11 +6,13 @@ import { InputText } from 'primereact/inputtext';
 import './pages.css';
 import { createDocument } from '../services/docsService';
 import Navbar from '../components/Navbar/navbar';
+import { useNavigate } from 'react-router-dom'; 
 
 const HomePage = () => {
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState('');
     const [error, setError] = useState<string | null>(null); // Error state for handling API errors
+    const navigate = useNavigate(); 
 
     const handleOpenDialog = () => {
         setVisible(true);
@@ -20,9 +22,12 @@ const HomePage = () => {
         try {
             const createdDoc = await createDocument(title);
             console.log("Document created:", createdDoc);
+            navigate(`/document/${createdDoc.doc.id}`);
+            
             setVisible(false);
             setTitle('');
             setError(null); // Reset any previous error
+            
         } catch (err: any) {
             setError('Failed to create document. Please try again.'); // Set error state
             console.error("Error creating document:", err);

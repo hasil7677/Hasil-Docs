@@ -1,24 +1,30 @@
-// Editor.tsx
-import React from 'react';
-import { useEditor, EditorContent } from '@tiptap/react'; // Assuming you're using Tiptap
+import React, { useEffect } from 'react';
+import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
-interface EditorProps {
-  content: string; // Prop for passing content to the editor
+interface TiptapEditorProps {
+    content: string;
+    setContent: (content: string) => void;
 }
 
-const Editor: React.FC<EditorProps> = ({ content }) => {
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: content, // Initial content
-  });
+export const Editor: React.FC<TiptapEditorProps> = ({ content, setContent }) => {
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content, // Initialize editor with the content
+        onUpdate: ({ editor }) => {
+            setContent(editor.getHTML()); // Update content state on editor update
+        },
+    });
 
-  return (
-    <div className="editor">
-      <EditorContent editor={editor} />
-    </div>
-  );
+    useEffect(() => {
+        if (editor) {
+            editor.commands.setContent(content); // Update editor content if it changes
+        }
+    }, [content, editor]);
+
+    return (
+        <EditorContent editor={editor} />
+    );
 };
 
-export default Editor;
 

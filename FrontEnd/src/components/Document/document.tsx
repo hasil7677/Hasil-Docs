@@ -1,22 +1,57 @@
-// Document.tsx
-import React, { useState } from 'react';
-import Editor from '../Editor/Editor'; // Import the Editor component
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'; // Make sure you have react-router-dom installed
+import { getDocumentById, updateDocument } from '../../services/docsService'; // Import your services
+import { Editor } from '../Editor/Editor'; // Your Tiptap editor component
+import { Button } from 'primereact/button'; // PrimeReact button
 
-const Document: React.FC = () => {
-  const [documentData, setDocumentData] = useState({
-    title: 'Untitled Document',
-    content: '<p>Start writing your document here...</p>' // Initial content
-  });
+const MainPage = () => {
+    const { id } = useParams<{ id: string }>(); // Get the document ID from the URL
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
-  return (
-    <div className="document">
-      {/* Display the document title */}
-      <h1>{documentData.title}</h1>
+    // Load the document when the component mounts or when the ID changes
+    useEffect(() => {
+        const loadDocument = async () => {
+            if (id) {
+                const document = await getDocumentById(id);
+                setTitle(document.title);
+                setContent(document.content);
+            }
+        };
 
-      {/* Render the Editor component, passing the document content */}
-      <Editor content={documentData.content} />
-    </div>
-  );
+        loadDocument();
+    }, [id]);
+
+    // Handle document update
+    const handleUpdateDocument = async () => {
+        if (!id) {
+            alert('Document ID is not available.');
+            return; // Exit the function if ID is not available
+        }
+    
+        try {
+            await updateDocument(id, title, content);
+            alert('Document updated successfully!');
+        } catch (error) {
+            console.error('Error updating document:', error);
+            alert('Failed to update document. Please try again.');
+        }
+    };
+    
+    return (
+        <div>
+            <h1>Document Editor</h1>
+            <h2>{title || 'Untitled Document'}</h2>
+
+            {/* Button to trigger the update */}
+            <Button label="Update Document" onClick={handleUpdateDocument} />
+
+            <div>
+                {/* Your Tiptap editor component */}
+                <Editor content={content} setContent={setContent} />
+            </div>
+        </div>
+    );
 };
 
-export default Document;
+export default MainPage;
