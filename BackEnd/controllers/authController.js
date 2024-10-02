@@ -37,7 +37,15 @@ const signin = async (req, res) => {
       if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
   
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      res.json({
+        token,
+        user: {
+          id: user._id,
+          name: user.name, // Assuming your user schema has these fields
+        
+          email: user.email,
+        }
+      });
     } catch (error) {
       console.error('Signin error:', error);  // Log the error details
       if (error instanceof z.ZodError) {

@@ -10,21 +10,17 @@ interface TiptapEditorProps {
 export const Editor: React.FC<TiptapEditorProps> = ({ content, setContent }) => {
     const editor = useEditor({
         extensions: [StarterKit],
-        content, // Initialize editor with the content
+        content,
         onUpdate: ({ editor }) => {
-            setContent(editor.getHTML()); // Update content state on editor update
+            setContent(editor.getHTML());
         },
     });
 
     useEffect(() => {
-        if (editor) {
-            editor.commands.setContent(content); // Update editor content if it changes
+        if (editor && editor.getHTML() !== content) {
+            editor.commands.setContent(content, false); // Set content without triggering an update
         }
     }, [content, editor]);
 
-    return (
-        <EditorContent editor={editor} />
-    );
+    return <EditorContent editor={editor} />;
 };
-
-

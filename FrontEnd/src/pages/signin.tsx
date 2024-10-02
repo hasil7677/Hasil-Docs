@@ -31,6 +31,7 @@ const SignInPage = () => {
             const data = await signin(email, password); // Call the signin service
             // Save the token or any necessary data (e.g., user ID) in local storage
             localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
             console.log('Sign-in successful:', data);
 
             // Update the authentication context

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Make sure you have react-router-dom installed
-import { getDocumentById, updateDocument } from '../../services/docsService'; // Import your services
-import { Editor } from '../Editor/Editor'; // Your Tiptap editor component
-import { Button } from 'primereact/button'; // PrimeReact button
+import { useParams } from 'react-router-dom';
+import { getDocumentById, updateDocument } from '../../services/docsService';
+import { Editor } from '../Editor/Editor';
+import { Button } from 'primereact/button';
+import './MainPage.css'; // Import your CSS file
 
 const MainPage = () => {
-    const { id } = useParams<{ id: string }>(); // Get the document ID from the URL
+    const { id } = useParams<{ id: string }>();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
-    // Load the document when the component mounts or when the ID changes
     useEffect(() => {
         const loadDocument = async () => {
             if (id) {
@@ -22,11 +22,10 @@ const MainPage = () => {
         loadDocument();
     }, [id]);
 
-    // Handle document update
     const handleUpdateDocument = async () => {
         if (!id) {
             alert('Document ID is not available.');
-            return; // Exit the function if ID is not available
+            return;
         }
     
         try {
@@ -43,10 +42,9 @@ const MainPage = () => {
             <h1>Document Editor</h1>
             <h2>{title || 'Untitled Document'}</h2>
 
-            {/* Button to trigger the update */}
             <Button label="Update Document" onClick={handleUpdateDocument} />
 
-            <div>
+            <div className="editor-container">
                 {/* Your Tiptap editor component */}
                 <Editor content={content} setContent={setContent} />
             </div>
@@ -55,3 +53,4 @@ const MainPage = () => {
 };
 
 export default MainPage;
+
