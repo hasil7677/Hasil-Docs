@@ -87,6 +87,20 @@ const deleteDocById = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete document' });
   }
 };
+const getAllByUserId = async (req, res) => {
+  try {
+    const {  user } = req.params; // Get document ID from request params
+    const all_docs = await Doc.find({ user }); // Find docs document by ID
+    if (all_docs.length === 0) {
+      return res.status(404).json({ error: 'User has no documents.' });
+    } 
+
+    res.status(200).json({ message: 'Documents fetched successfully', all_docs });
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    res.status(500).json({ error: 'Failed to fetch documents' });
+  }
+};
 
 
-module.exports = { createDoc, getDocById, updateDoc,deleteDocById };
+module.exports = { createDoc, getDocById, updateDoc,deleteDocById, getAllByUserId };

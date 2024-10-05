@@ -30,9 +30,9 @@ export default function Navbar() {
           ];
 
     const items = [
-        { label: 'Home', icon: 'pi pi-home' },
-        { label: 'Features', icon: 'pi pi-star' },
+        { label: 'Home', icon: 'pi pi-home',command: () => navigate('/') },
         { label: 'Projects', icon: 'pi pi-search' },
+        { label: 'About', icon: 'pi pi-star' },
         { label: 'Contact', icon: 'pi pi-envelope' }
     ];
 

@@ -1,17 +1,26 @@
 // src/components/ProfilePage.tsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
 // import './ProfilePage.css'; // Import your CSS file
 import './pages.css';
+import { formToJSON } from 'axios';
 const ProfilePage: React.FC = () => {
+     
     const [user, setUser] = useState({
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        profilePicture: 'https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png',
+       
+        name: '',
+        email: '',
+        profilePicture: '',
     });
+    useEffect(() => {
+        const temp = localStorage.getItem('user');
+        const data=JSON.parse(temp);
+        console.log(data)
+
+
+    }, []);
 
     const handleEdit = () => {
         // Handle edit logic here
@@ -23,7 +32,7 @@ const ProfilePage: React.FC = () => {
             <div className="profile-header">
                 <Avatar image={user.profilePicture} shape="circle" size="large" />
                 <div className="profile-info">
-                    <h2>{user.firstName} {user.lastName}</h2>
+                    <h2> {user.name}</h2>
                     <p>{user.email}</p>
                 </div>
             </div>
