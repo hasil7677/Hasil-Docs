@@ -15,8 +15,12 @@ import ProfilePage from './pages/profile';
 // import Document from './components/Document/document';
 import MainPage from './components/Document/document';
 import TestDocument from './components/test';
+import WelcomePage from './pages/welcome';
+import DocumentsPage from './pages/alldocs';
+
 
 function App() {
+  const isLoggedIn = localStorage.getItem('token') !== null;
 
   return (
     <AuthProvider>
@@ -25,11 +29,14 @@ function App() {
    <Navbar />
             <Routes>
                 <Route path="/document/:id" element={<MainPage />} />
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={isLoggedIn ? <HomePage /> : <WelcomePage />} />
                 <Route path="/test" element={<TestDocument />} />
                 <Route path="/signin" element={<SignInPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/about" element={<WelcomePage />} />
+
+                <Route path="/alldocs" element={<  DocumentsPage/>} />
             </Routes>
         </Router>
         </AuthProvider>

@@ -60,3 +60,100 @@
 .edit-button:hover {
     background-color: #005f99; /* Darker shade for hover */
 }
+/* WelcomePage.css */
+.welcome-container {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f4f4f4;
+  }
+  
+  .welcome-card {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .welcome-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .welcome-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .welcome-button:hover {
+    background-color: #007bff;
+  }
+  
+  .extra-description {
+    margin-top: 20px;
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+  
+  @media (max-width: 768px) {
+    .welcome-container {
+      padding: 20px;
+    }
+  
+    .welcome-card {
+      padding: 20px;
+    }
+  
+    .welcome-button {
+      width: 100%;
+      font-size: 1rem;
+    }
+  }
+  
+
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .document-box {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .document-box h3 {
+    margin-bottom: 10px;
+  }
+  
+  .document-box button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .document-box button:hover {
+    background-color: #0056b3;
+  }
+  

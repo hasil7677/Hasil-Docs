@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 
 import './pages.css';
 import { createDocument } from '../services/docsService';
+import { getAllDocsByUserId } from '../services/docsService';
 import Navbar from '../components/Navbar/navbar';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -17,6 +18,20 @@ const HomePage = () => {
     const handleOpenDialog = () => {
         setVisible(true);
     };
+    useEffect(()=>{
+        const userData = localStorage.getItem('user');
+
+// Check if userData exists to avoid errors
+if (userData) {
+  // Parse it back into an object
+  const user = JSON.parse(userData);
+
+  // Access the "id" property
+  const userId = user.id;
+  console.log("User ID:", userId);
+} else {
+  console.log("No user data found in localStorage.");}
+    })
 
     const handleCreate = async () => {
         try {

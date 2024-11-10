@@ -44,3 +44,68 @@ button {
 button:hover {
     background-color: #0056b3; /* Darker on hover */
 }
+.toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: #f4f4f4;
+    border-right: 1px solid #ddd;
+    width: 200px;
+  }
+  .toolbar button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  .toolbar button:hover {
+    background-color: #ddd;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: column; /* Make everything stack vertically */
+    align-items: center;
+  }
+  .toolbar-container {
+    width: 100%; /* Make sure toolbar takes full width in the container */
+    max-width: 1000px; /* Limit the width of the toolbar */
+    margin-bottom: 20px; /* Add space between toolbar and editor */
+  }
+  
+  .editor-container {
+    width: 100%; /* Make sure the editor takes full available space */
+    max-width: 1000px; /* Limit the width of the editor */
+    background-color: #f4f4f4; /* Optional: for better visibility */
+  }
+  
+  /* Optionally add styles for the toolbar */
+  .toolbar {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  /* MainPage.css */
+.toolbar-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toolbar-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.toolbar-btn:hover {
+    background-color: cyan;
+}

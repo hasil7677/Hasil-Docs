@@ -65,4 +65,18 @@ export const deleteDocument=async(id:string)=>{
         throw error; // Re-throw the error to handle it in the component
     }
 };
-    
+export const getAllDocsByUserId= async(user:string)=>{
+    try {
+        const token = localStorage.getItem('token'); // Get the token from localStorage
+        const response = await axios.get(`${API_URL}/get_all/${user}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`, // Include the JWT token in the Authorization header
+                'Content-Type': 'application/json', // Set content type to JSON
+            },
+        });
+        return response.data; // Return the document data
+    } catch (error: any) { // Type the error as 'any'
+        console.error("Error fetching document:", error.response ? error.response.data : error.message);
+        throw error; // Re-throw the error to handle it in the component
+    }
+}
